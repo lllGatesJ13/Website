@@ -1,11 +1,15 @@
-from flask import Flask, render_template  # Import Flask and render_template function
+from flask import Flask, render_template
+import os
 
-app = Flask(__name__)  # Create a Flask app instance
+app = Flask(__name__)
 
-@app.route("/")  # Define a route for the homepage ("/")
+@app.route("/")
 def home():
-    # Render the "index.html" template located in the "templates" folder
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Get the port from environment variable or default to 5000
+    port = int(os.environ.get("PORT", 5000))
+    
+    # Run the Flask app, listening on 0.0.0.0 for external access
+    app.run(debug=False, host="0.0.0.0", port=port)
